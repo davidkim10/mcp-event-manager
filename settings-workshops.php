@@ -1,7 +1,8 @@
 <?php
-require_once 'cf7-mcp-templates.php';
-
+require_once plugin_dir_path( __FILE__ ) . 'includes/templates.php';
 add_action( 'admin_menu', 'cf7_add_workshops' );
+
+
 
 function cf7_add_workshops() {
     add_submenu_page(
@@ -9,14 +10,16 @@ function cf7_add_workshops() {
         'Add Workshop',
         'Add Workshop',
         'manage_options',
-        'cf7-add-add-workshop',
-        'cf7_add_workshops_admin_panel'
+        'cf7-add-workshop',
+        'admin_settings_workshops'
     );
 }
 
-function cf7_add_workshops_admin_panel() {
-    $options = get_option('cf7_mcp_live_events');
-    $num_rows= count($options) ?? 0;
+function admin_settings_workshops() {
+    global $mcp_cf7;
+    $db_key = $mcp_cf7::DB_KEY_WORKSHOPS;
+    $options = get_option($db_key);
+    $num_rows = is_array($options) ? count($options) : 0;
     ?>
     <div class="cf7-mcp-tabs" style="padding: 40px 40px 0 20px;">
         <?php echo render_alert_container(); ?>
@@ -33,7 +36,7 @@ function cf7_add_workshops_admin_panel() {
         </p>
         <div style="margin: 50px 0 25px 0;">
           <label for="mcp-live-event-shortcode"><strong>Use Shortcode:</strong></label>
-          <input type="text" id="mcp-live-event-shortcode" value="[mcp_live_events]" readonly>
+          <input type="text" id="mcp-live-event-shortcode" value="[<?php echo $mcp_cf7::KEY_WORKSHOPS; ?>]" readonly>
           <p style="font-style: italic;"><small>Don't forget to initialize and map fields for CF7. Use the public mcp_utils.</small></p>
         </div>
     </div>

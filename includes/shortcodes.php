@@ -1,7 +1,11 @@
 <?php
-add_shortcode( 'mcp_live_events', 'cf7_mcp_live_events_shortcode' );
+global $mcp_cf7;
+$workshop_shortcode_key = $mcp_cf7::KEY_WORKSHOPS;
 
-function cf7_mcp_live_events_shortcode() {
+add_shortcode($workshop_shortcode_key, 'create_workshop_shortcode' );
+
+
+function create_workshop_shortcode() {
     $defaultOption = '<select><option>-- No events at this time --</option>';
     $options = get_option('cf7_mcp_live_events');
     $output = '';
