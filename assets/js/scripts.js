@@ -8,7 +8,7 @@ function toggle_table_remove_btn() {
   }
 }
 
-function mcp_remove_field(e, eventKey) {
+function mcp_remove_event(e, eventKey) {
   e.preventDefault();
   var $ = jQuery;
   var remove_button = $(e.currentTarget);
@@ -19,7 +19,7 @@ function mcp_remove_field(e, eventKey) {
     if (!isConfirmed) return;
     $.ajax({
       type: "POST",
-      url: cf7_ajax_object.ajax_url,
+      url: mcp_ajax_object.ajax_url,
       data: { action: "cf7_remove_field", id: id, eventKey: eventKey },
       success: function (response) {
         console.log("response", response.data);
@@ -46,7 +46,7 @@ function mcp_remove_field(e, eventKey) {
   }
 }
 
-function mcp_save_fields(e) {
+function mcp_save_events(e) {
   e.preventDefault();
   var $ = jQuery;
   var data = [];
@@ -73,7 +73,7 @@ function mcp_save_fields(e) {
   }
   $.ajax({
     type: "POST",
-    url: cf7_ajax_object.ajax_url,
+    url: mcp_ajax_object.ajax_url,
     data: {
       action: "cf7_save_fields",
       data: data,
