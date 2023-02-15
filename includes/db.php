@@ -4,8 +4,14 @@ add_action('wp_ajax_cf7_save_fields', 'cf7_save_fields');
 
 function cf7_save_fields() {
     $data = $_POST['data'];
-    $optionKey = $_POST['optionKey'] ?? 'cf7_mcp_workshops';
+    $optionKey = $_POST['optionKey'];
     $options = array();
+        
+    if(!$optionKey) {
+        wp_send_json_error('optionKey missing');
+        wp_die();
+    }
+    
     foreach($data as $field) {
         $options[] = array(
             'location' => $field['location'],
@@ -20,7 +26,13 @@ function cf7_save_fields() {
 
 function cf7_remove_field() { 
     $id = $_POST['id'];
-    $optionKey = $_POST['optionKey'] ?? 'cf7_mcp_workshops';
+    $optionKey = $_POST['optionKey'];
+    
+    if(!$optionKey) {
+        wp_send_json_error('optionKey missing');
+        wp_die();
+    }
+
     $options = get_option($optionKey);
     if (!empty($options)) {
         foreach ($options as $index => $option) {

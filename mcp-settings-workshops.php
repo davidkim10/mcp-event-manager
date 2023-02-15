@@ -41,6 +41,7 @@ function admin_settings_workshops() {
     </div>
     <script>
         jQuery(document).ready(function($) {
+            $('.cf7-remove-field').attr('data-scope','<?php echo $optionKey; ?>');
             $('.cf7-add-field').click(function(e) {
                 e.preventDefault();
                 var tableRow = '<?php echo addslashes(render_table_row(array('location' => '', 'id' => '', 'date' => '', 'time' => ''), 2)); ?>';

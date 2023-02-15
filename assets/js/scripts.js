@@ -8,19 +8,21 @@ function toggle_table_remove_btn() {
   }
 }
 
-function mcp_remove_event(e, eventKey) {
+function mcp_remove_event(e) {
   e.preventDefault();
   var $ = jQuery;
   var remove_button = $(e.currentTarget);
   var row = remove_button.closest(".custom-field-row");
   var id = row.find('input[name="cf7_custom_field_id[]"]').val();
+  var optionKey = e.target.dataset.scope;
+
   if (id) {
     var isConfirmed = confirm("Are you sure you want to remove this event?");
     if (!isConfirmed) return;
     $.ajax({
       type: "POST",
       url: mcp_ajax_object.ajax_url,
-      data: { action: "cf7_remove_field", id: id, eventKey: eventKey },
+      data: { action: "cf7_remove_field", id: id, optionKey: optionKey },
       success: function (response) {
         console.log("response", response.data);
         if (response.success) {
@@ -51,7 +53,7 @@ function mcp_save_events(e) {
   var $ = jQuery;
   var data = [];
   var optionKey = e.target.dataset.scope;
-  console.log("optionKey", optionKey);
+  var hasEmpty = false;
   $("tbody tr").each(function () {
     var location = $(this).find('input[name="cf7_custom_field_name[]"]').val();
     var id = $(this).find('input[name="cf7_custom_field_id[]"]').val();
@@ -65,9 +67,13 @@ function mcp_save_events(e) {
         date: date,
         time: time,
       });
+    } else {
+      hasEmpty = true;
+      return false;
     }
   });
-  if (!data.length) {
+
+  if (!data.length || hasEmpty) {
     mcp_alerts.error("All fields are required");
     return;
   }
@@ -81,10 +87,10 @@ function mcp_save_events(e) {
     },
     success: function (response) {
       console.log("success", response);
-      mcp_alerts.add("Event saved successfully");
+      mcp_alerts.add("Event saved successfully... page will refresh");
       setTimeout(function () {
         window.location.reload();
-      }, 3000);
+      }, 2500);
     },
     error: function (error) {
       mcp_alerts.error("There was an error saving your event:" + error);

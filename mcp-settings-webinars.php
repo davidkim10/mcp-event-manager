@@ -41,6 +41,7 @@ function admin_settings_webinars() {
     </div>
     <script>
         jQuery(document).ready(function($) {
+            $('.cf7-remove-field').attr('data-scope','<?php echo $optionKey; ?>');
             $('.cf7-add-field').click(function(e) {
                 e.preventDefault();
                 var tableRow = '<?php echo addslashes(render_table_row(array('location' => 'Zoom', 'id' => '', 'date' => '', 'time' => ''), 2)); ?>';
