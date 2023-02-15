@@ -22,7 +22,8 @@ function render_table_row($option, $num_rows, $className = "") {
     return $html;
 }
 
-function render_table($options, $num_rows = 0) {
+function render_table($options, $num_rows = 0, $type = "workshops") {
+    $location = $type == "webinars" ? "Zoom" : "";
     ob_start();
     ?>
     <table class="wp-list-table widefat fixed striped custom-fields custom-fields-wrap">
@@ -41,7 +42,7 @@ function render_table($options, $num_rows = 0) {
                     <?php echo render_table_row($option, 2, "db_exist"); ?>
                 <?php endforeach; ?>
             <?php else : ?>
-                <?php $option = array('location' => '', 'id' => '', 'date' => '', 'time' => ''); ?>
+                <?php $option = array('location' => $location, 'id' => '', 'date' => '', 'time' => ''); ?>
                 <?php echo render_table_row($option, $num_rows); ?>
             <?php endif; ?>
         </tbody>

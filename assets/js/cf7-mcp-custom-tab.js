@@ -50,6 +50,8 @@ function mcp_save_fields(e) {
   e.preventDefault();
   var $ = jQuery;
   var data = [];
+  var optionKey = e.target.dataset.scope;
+  console.log("optionKey", optionKey);
   $("tbody tr").each(function () {
     var location = $(this).find('input[name="cf7_custom_field_name[]"]').val();
     var id = $(this).find('input[name="cf7_custom_field_id[]"]').val();
@@ -75,6 +77,7 @@ function mcp_save_fields(e) {
     data: {
       action: "cf7_save_fields",
       data: data,
+      optionKey: optionKey,
     },
     success: function (response) {
       console.log("success", response);

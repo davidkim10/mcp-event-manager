@@ -18,9 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class MCP {
 	const KEY_WORKSHOPS = 'mcp_workshops';
-	const KEY_WEBINAR = 'mcp_webinars';
+	const KEY_WEBINARS = 'mcp_webinars';
 	const DB_KEY_WORKSHOPS = "cf7_mcp_workshops";
-	const DB_KEY_WEBINAR = "cf7_mcp_webinars";
+	const DB_KEY_WEBINARS = "cf7_mcp_webinars";
 	private static $instance;
 	private function __construct() {
 	  // constructor code here
@@ -38,6 +38,7 @@ global $mcp_cf7;
 $mcp_cf7 = MCP::get_instance();
 
 require_once plugin_dir_path( __FILE__ ) . 'mcp-loader.php';
-require_once plugin_dir_path( __FILE__ ) . 'settings-workshops.php'; 
+require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-workshops.php'; 
+require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-webinars.php'; 
 require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/db.php';
