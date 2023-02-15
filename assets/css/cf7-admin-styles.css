@@ -1,0 +1,49 @@
+.cf7-mcp-tabs {
+  position: relative;
+  padding: 40px 40px 0 20px;
+}
+
+.cf7-mcp-alerts {
+  position: absolute;
+  background-color: #ccc;
+  top: 0;
+  left: -20px;
+  right: 0;
+  font-size: 14px;
+  display: none;
+  border: none !important;
+  margin: 0 !important;
+}
+
+.cf7-mcp-alerts.success {
+  background-color: #41ae16;
+  color: #eee;
+}
+
+.cf7-mcp-alerts.error {
+  background-color: #ff583c;
+  color: #eee;
+}
+
+.cf7-mcp-alerts.warning {
+  background-color: #e69e25;
+  color: #eee;
+}
+
+.cf7-mcp-alerts .container {
+  padding: 4px;
+  margin: 0 30px;
+  font-size: 14px;
+}
+
+.cf7-mcp-tabs .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cf7-mcp-tabs .header .btn-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
