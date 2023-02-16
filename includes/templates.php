@@ -1,5 +1,5 @@
 <?php
-
+// *** Alerts ***
 function render_alert_container() {
     ob_start();
     ?>
@@ -9,6 +9,22 @@ function render_alert_container() {
     <?php
     return ob_get_clean();
 }
+
+// *** Display Shortcode w/Copy Function 
+function render_shortcode_section($shortcode) {
+    ob_start();
+    ?>
+    <section>
+        <h2><label for="mcp-live-event-shortcode">Shortcode</label></h2>
+        <div class="input-group">
+            <input type="text" id="mcp-live-event-shortcode" value="[<?php echo $shortcode; ?>]" readonly>
+            <button class="button-secondary mcp-copy-btn">Copy</button>
+        </div>
+        <p style="font-style: italic;"><small>For developer usage</small></p>
+    </section>
+    <?php
+    return ob_get_clean();
+} 
 
 function render_table_row($option, $num_rows, $className = "") {
     $class = $className ? ' ' . $className : '';

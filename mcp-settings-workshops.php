@@ -1,14 +1,14 @@
 <?php
 require_once plugin_dir_path( __FILE__ ) . 'includes/templates.php';
-add_action( 'admin_menu', 'cf7_add_workshops' );
+add_action( 'admin_menu', 'register_mcp_admin_settings_workshops' );
 
-function cf7_add_workshops() {
+function register_mcp_admin_settings_workshops() {
     add_submenu_page(
-        'wpcf7',
-        'Add Workshop',
-        'Add Workshop',
+        'mcp-workshops-and-webinars',
+        'Edit Workshops',
+        'Edit Workshops',
         'manage_options',
-        'cf7-add-workshop',
+        'mcp-add-workshop',
         'admin_settings_workshops'
     );
 }
@@ -19,25 +19,30 @@ function admin_settings_workshops() {
     $shortcode = $mcp_cf7::KEY_WORKSHOPS;
     $options = get_option($optionKey);
     $num_rows = is_array($options) ? count($options) : 0;
+    $tooltipMsg = 'All form fields are required or the event will not save in the database.';
     ?>
     <div class="cf7-mcp-tabs" style="padding: 40px 40px 0 20px;" data-scope="<?php echo $optionKey; ?>">
         <?php echo render_alert_container(); ?>
         <header class="header">
-            <h1>Manage Workshops</h1>
-            <div class="btn-group">
-                <button class="cf7-add-field button-secondary">Add Workshop</button>
+            <h1>Workshops</h1>
+        </header>
+        <section class="section-wrapper">
+            <div class="table-header">
+                <h2>Manage Events</h2>
+                <div class="btn-group">
+                    <button class="cf7-add-field button-secondary">Add</button>
+                    <button class="cf7-save-fields button-primary" data-scope="<?php echo $optionKey; ?>">Save & Publish</button>
+                </div>
+            </div>
+            <div>
+                <?php echo render_table($options, $num_rows); ?>
+                <p>Friendly Reminder: All fields are required<p>
+            </div>
+            <div style="margin: 20px 0;">
                 <button class="cf7-save-fields button-primary" data-scope="<?php echo $optionKey; ?>">Save & Publish</button>
             </div>
-        </header>
-        <?php echo render_table($options, $num_rows); ?>
-        <p>
-        <button class="cf7-save-fields button-primary" data-scope="<?php echo $optionKey; ?>">Save & Publish</button>
-        </p>
-        <div style="margin: 50px 0 25px 0;">
-          <label for="mcp-live-event-shortcode"><strong>Use Shortcode:</strong></label>
-          <input type="text" id="mcp-live-event-shortcode" value="[<?php echo $shortcode; ?>]" readonly>
-          <p style="font-style: italic;"><small>Don't forget to initialize and map fields for CF7. Use the public mcp_utils.</small></p>
-        </div>
+        </section>
+        <?php echo render_shortcode_section($shortcode); ?>
     </div>
     <script>
         jQuery(document).ready(function($) {

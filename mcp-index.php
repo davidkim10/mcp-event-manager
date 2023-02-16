@@ -16,7 +16,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// Plugin Configuration
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'mcp_plugin_settings_link');
+
+function mcp_plugin_settings_link( $links ) {
+    $settings_link = '<a href="' . admin_url( 'admin.php?page=mcp-plugin-settings' ) . '">' . __( 'Settings', 'mcp-plugin' ) . '</a>';
+    array_splice( $links, count( $links ) - 1, 0, $settings_link );
+    return $links;
+}
+
 class MCP {
+	const URL_PATH_ADMIN_HOME= 'mcp-workshops-and-webinars';
+	const URL_PATH_WORKSHOPS= 'mcp-add-workshops';
+	const URL_PATH_WEBINARS= 'mcp-add-webinars';
 	const KEY_WORKSHOPS = 'mcp_workshops';
 	const KEY_WEBINARS = 'mcp_webinars';
 	const DB_KEY_WORKSHOPS = "cf7_mcp_workshops";
@@ -38,6 +50,7 @@ global $mcp_cf7;
 $mcp_cf7 = MCP::get_instance();
 
 require_once plugin_dir_path( __FILE__ ) . 'mcp-loader.php';
+require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-admin.php';
 require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-workshops.php'; 
 require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-webinars.php'; 
 require_once plugin_dir_path( __FILE__ ) . 'includes/shortcodes.php';

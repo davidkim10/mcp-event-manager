@@ -1,13 +1,3 @@
-function _mcp_isEmptyRow(row) {
-  var input = row.querySelector("input[name='cf7_custom_field_name[]']");
-  return !input.value;
-}
-function _mcp_getEmptyRows() {
-  return jQuery(".custom-field-row")
-    .toArray()
-    .filter((row) => _mcp_isEmptyRow(row));
-}
-
 var mcp_alerts = {
   target: jQuery(".cf7-mcp-alerts"),
   container: jQuery(".cf7-mcp-alerts .container"),
@@ -48,3 +38,22 @@ var mcp_utils = {
   isEmptyRow: _mcp_isEmptyRow,
   getEmptyRows: _mcp_getEmptyRows,
 };
+
+function mcpCopyToClipBoard(event) {
+  var inputElement = event.target.previousElementSibling;
+  inputElement.select();
+  document.execCommand("Copy");
+  // alert("Copied the text: " + inputElement.value);
+  mcp_alerts.add("Copied to clipboard");
+}
+
+function _mcp_isEmptyRow(row) {
+  var input = row.querySelector("input[name='cf7_custom_field_name[]']");
+  return !input.value;
+}
+
+function _mcp_getEmptyRows() {
+  return jQuery(".custom-field-row")
+    .toArray()
+    .filter((row) => _mcp_isEmptyRow(row));
+}

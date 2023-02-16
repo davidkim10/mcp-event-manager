@@ -9,8 +9,8 @@ var mcp_utils = {
       }
     },
     targets: {
-      live: document.querySelector(".mcp_live_events_target"),
-      webinar: document.querySelector(".mcp_live_events_webinar"),
+      live: document.querySelector(".mcp_workshops_target"),
+      webinar: document.querySelector(".mcp_webinars_target"),
     },
     source: {
       live: document.querySelector(".mcp_live_events"),

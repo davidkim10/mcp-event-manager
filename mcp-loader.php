@@ -1,5 +1,5 @@
 <?php
-// add_action( 'wp_enqueue_scripts', 'load_styles');
+// Load Assets
 // The PHP_INT_MAX constant tells WordPress to load this plugin last
 add_action( 'wp_enqueue_scripts', 'load_public_js', PHP_INT_MAX);
 add_action( 'admin_enqueue_scripts', 'load_admin_js', PHP_INT_MAX );
