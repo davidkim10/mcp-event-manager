@@ -13,7 +13,7 @@ Requires PHP: 7.4
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+  exit; // Exit if accessed directly.
 }
 
 // Plugin Configuration
@@ -36,7 +36,7 @@ class MCP {
   
   private static $instance;
   private function __construct() {}
-  
+
   public static function get_instance() {
     if ( ! isset( self::$instance ) ) {
       self::$instance = new self();
