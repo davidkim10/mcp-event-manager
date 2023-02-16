@@ -69,7 +69,7 @@ function render_admin_template() {
                     <thead>
                         <tr>
                             <th>Type</th>
-                            <th>Selector</th>
+                            <th>Selector Target</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,7 +85,7 @@ function render_admin_template() {
                 </table>
                 <pre><code class="language-php">// Initalize Example
 jQuery('document').ready(function() {
-    mcp_utils.select.init()
+    wpmcp_utils.select.init()
 });</code></pre>
                 
                 <h3 style="margin-top: 30px;">- Dependencies</h3>
