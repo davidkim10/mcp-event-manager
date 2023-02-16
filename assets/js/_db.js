@@ -1,22 +1,23 @@
 // AJAX functions to update events
 function AJAX_REMOVE_EVENT(rowId, optionKey, callback) {
-  var ENDPOINT = mcp_ajax_config.ajax_url;
+  var ACTION = "cf7_remove_field";
+  var ENDPOINT = mcp_ajax_config.endpoint;
   var DATA = {
-    action: "cf7_remove_field",
+    action: ACTION,
     rowId: rowId,
     optionKey: optionKey,
   };
 
-  function onError(error) {
-    mcp_alerts.error("Error removing your event");
+  function onError(err) {
+    mcp_alerts.error("Error removing your event: " + err);
   }
 
-  function onSuccess(response) {
-    if (response.success) {
-      mcp_alerts.add("Success: Event removed");
-      if (callback) callback();
+  function onSuccess(res) {
+    if (res.success) {
+      mcp_alerts.add("Event was removed successfully");
+      callback && callback();
     } else {
-      mcp_alerts.error("Error removing event:" + response.data);
+      mcp_alerts.error("Error removing event: " + res.data);
     }
   }
 
@@ -30,22 +31,24 @@ function AJAX_REMOVE_EVENT(rowId, optionKey, callback) {
 }
 
 function AJAX_SAVE_EVENTS(data, optionKey) {
-  var ENDPOINT = mcp_ajax_config.ajax_url;
-  function handleSaveSuccess(response) {
-    console.log("success", response);
+  var ACTION = "cf7_save_fields";
+  var ENDPOINT = mcp_ajax_config.endpoint;
+
+  function handleSaveSuccess(res) {
+    console.log("success", res);
     mcp_alerts.add("Event saved successfully!");
   }
 
-  function handleSaveError(error) {
-    mcp_alerts.error("There was an error saving your event:" + error);
-    console.log(error);
+  function handleSaveError(err) {
+    mcp_alerts.error("There was an error saving your event:" + err);
+    console.log(err);
   }
 
   jQuery.ajax({
     type: "POST",
     url: ENDPOINT,
     data: {
-      action: "cf7_save_fields",
+      action: ACTION,
       data: data,
       optionKey: optionKey,
     },

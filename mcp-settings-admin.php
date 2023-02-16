@@ -59,7 +59,7 @@ function render_admin_template() {
                     </tbody>
                 </table>
             </section>
-            <section>
+            <section style="margin-top: 75px;">
                 <h2>Developer Documentation</h2>
                 <p>The Event Manager plugin generates shortcodes that produce select elements with options formatted for web forms tailored to the specific business use case. To map the corresponding dropdown items to Contact Form 7, the shortcode should be initialized with the utility function(s) provided by the plugin. The shortcode syntax can be found under each table in its respective view.</p>
 

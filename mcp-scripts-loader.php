@@ -24,6 +24,6 @@ function load_admin_js() {
     wp_enqueue_script( 'mcp-admin-db', get_asset('/assets/js/_db.js'), array( 'jquery' ), '1.0', true );
     wp_enqueue_script( 'mcp-admin-events', get_asset('/assets/js/_events.js'), array( 'jquery', 'mcp-admin-utils', 'mcp-admin-db' ), '1.0', true );
     wp_enqueue_script( 'mcp-admin-init', get_asset('/assets/js/init.js', __FILE__ ), array( 'jquery', 'mcp-admin-events' ), '1.0', true );
-    wp_localize_script( 'mcp-admin-db', 'mcp_ajax_config', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+    wp_localize_script( 'mcp-admin-db', 'mcp_ajax_config', array( 'endpoint' => admin_url( 'admin-ajax.php' ) ) );
 }
 // END WP ADMIN ONLY
