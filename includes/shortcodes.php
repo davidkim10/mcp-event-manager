@@ -30,7 +30,7 @@ function create_workshop_shortcode() {
     global $wp_mcp;
     $option_key = 'mcp_workshops_field';
     $options = get_option($wp_mcp::DB_KEY_WORKSHOPS);
-    return create_select_field($options, $option_key, 'id', $option_key . ' mcp-field mcp-empty');
+    return create_select_field($options, $option_key, 'eventId', $option_key . ' mcp-field mcp-empty');
 }
 
 function create_webinar_shortcode() {
