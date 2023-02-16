@@ -24,6 +24,7 @@ class WPMCP_Utils {
   init() {
     const keys = Object.keys(this.select.targets);
     keys.forEach((key) => {
+      source.style.display = "none";
       const targetClassName = this.select.targets[key];
       const sourceClassName = this.select.source[key];
       const target = document.querySelector(targetClassName);
