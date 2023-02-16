@@ -51,7 +51,8 @@ class MCPEvents {
     e.preventDefault();
     const data = [];
     const optionKey = this.getOptionKey(e);
-    const msg_error = "All fields are required";
+    const msg_error =
+      "All fields are required! Fill out all the fields or remove empty events.";
     const tableRows = document.querySelectorAll("tbody tr");
     let shouldSave = true;
 
