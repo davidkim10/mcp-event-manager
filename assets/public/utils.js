@@ -10,6 +10,13 @@ class WPMCP_Utils {
           target.selectedIndex = 0;
         }
       },
+      hide: function () {
+        const workshop = this.source.workshop;
+        const webinar = this.source.webinar;
+        [workshop, webinar].forEach((className) => {
+          document.querySelector(className).style.display = "none";
+        });
+      },
       targets: {
         workshop: ".mcp_workshops_target",
         webinar: ".mcp_webinars_target",
