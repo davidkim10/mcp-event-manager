@@ -20,13 +20,10 @@ This plugin was designed to helped MCP manage their workshops and webinars. Spec
 
 == Frequently Asked Questions ==
 
-= How do I set up a workshop or webinar? =
+= How do I use this with Contact Form 7? =
 
-Go to the settings page and add your workshops or webinars.
+Use the mcp_utils and initialize the shortcodes. Developer documentation can be found on the settings page.
 
-= How do I display the registration form? =
-
-Use the generated shortcodes found in the each dashboard for workshops and webinars.
 
 == Changelog ==
 
