@@ -90,6 +90,7 @@ jQuery('document').ready(function() {
                 
                 <h3 style="margin-top: 30px;">- Dependencies</h3>
                 <p>jQuery is required for this plugin to operate correctly.</p>
+                <p>This plugin will not work for browsers that use IE11.</p>
 
                 <h3 style="margin-top: 30px;">- Plugin Updates</h3>
                 <p>This plugin will receive updates from its repository located on GitHub.</p>
