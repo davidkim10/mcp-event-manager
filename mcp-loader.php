@@ -10,19 +10,21 @@ function get_asset($str) {
 }
 
 function load_public_js() {
-    wp_enqueue_script( 'mcp-utils', get_asset('/assets/public/utils.js'), array( 'jquery' ), '1.0', true );
+    wp_enqueue_script( 'mcp-public-utils', get_asset('/assets/public/utils.js'), array( 'jquery' ), '1.0', true );
 }
 
-// START WP ADMIN ONLY -- Will not be public facing
+// START WP ADMIN ONLY 
 function load_admin_css() {
-    wp_enqueue_style( 'cf7-admin-styles', get_asset('/assets/css/cf7-admin-styles.css'));
+    wp_enqueue_style( 'mcp-admin-styles', get_asset('/assets/css/mcp-admin-styles.css'));
 }
 
 function load_admin_js() {
-    wp_enqueue_script( 'mcp-utils', get_asset('/assets/js/utils.js'), array( 'jquery' ), '1.0', true );
-    wp_enqueue_script( 'mcp-db', get_asset('/assets/js/db.js'), array( 'jquery' ), '1.0', true );
-    wp_enqueue_script( 'mcp-scripts', get_asset('/assets/js/scripts.js'), array( 'jquery', 'mcp-utils', 'mcp-db' ), '1.0', true );
-    wp_localize_script( 'mcp-scripts', 'mcp_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
-    wp_enqueue_script( 'mcp-js-init', get_asset('/assets/js/init.js', __FILE__ ), array( 'jquery', 'mcp-scripts' ), '1.0', true );
+    wp_enqueue_script( 'mcp-admin-alerts', get_asset('/assets/js/alerts.js'), array( 'jquery' ), '1.0', true );
+    wp_enqueue_script( 'mcp-admin-utils', get_asset('/assets/js/utils.js'), array( 'jquery' ), '1.0', true );
+    wp_enqueue_script( 'mcp-admin-db', get_asset('/assets/js/db.js'), array( 'jquery' ), '1.0', true );
+    wp_enqueue_script( 'mcp-admin-scripts', get_asset('/assets/js/scripts.js'), array( 'jquery', 'mcp-admin-utils', 'mcp-admin-db' ), '1.0', true );
+    wp_enqueue_script( 'mcp-admin-init', get_asset('/assets/js/init.js', __FILE__ ), array( 'jquery', 'mcp-admin-scripts' ), '1.0', true );
+
+    wp_localize_script( 'mcp-admin-scripts', 'mcp_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 }
 // END WP ADMIN ONLY
