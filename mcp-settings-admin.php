@@ -17,18 +17,15 @@ function render_admin_template() {
     global $wp_mcp;
     $option_key_workshops = $wp_mcp::DB_KEY_WORKSHOPS;
     $option_key_webinars = $wp_mcp::DB_KEY_WEBINARS;
-
     $workshops = get_option( $option_key_workshops);
     $webinars = get_option( $option_key_webinars);
     $workshopsCount = is_array($workshops) ? count($workshops) : 0;
     $webinarsCount = is_array($webinars) ? count($webinars) : 0;
-
     $workshops_page_url = admin_url('admin.php?page=mcp-add-webinar');
     $webinars_page_url = admin_url('admin.php?page=mcp-add-webinar');
 
     ob_start();
     ?>
-
     <div class="mcp-admin-home">
         <div class="container">
             <header style="margin-bottom: 20px;">
@@ -87,11 +84,9 @@ function render_admin_template() {
 jQuery('document').ready(function() {
     wpmcp_utils.select.init()
 });</code></pre>
-                
                 <h3 style="margin-top: 30px;">- Dependencies</h3>
                 <p>jQuery is required for this plugin to operate correctly.</p>
                 <p>This plugin will not work for browsers that use IE11.</p>
-
                 <h3 style="margin-top: 30px;">- Plugin Updates</h3>
                 <p>This plugin will receive updates from its repository located on GitHub.</p>
             </section>
