@@ -5,6 +5,7 @@ class WPMCP_Utils {
       assign: (target, source) => {
         if (target && source) {
           Array.from(source.options).forEach((option) => {
+            option.value = `${option.value} | ${option.innerText}`;
             target.append(option);
           });
           target.selectedIndex = 0;
