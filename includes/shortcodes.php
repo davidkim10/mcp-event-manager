@@ -13,7 +13,7 @@ function create_workshop_shortcode() {
     $output = '';
     
     if(!empty($options)){
-        $output = '<select class="mcp_live_events">';
+        $output = '<select class="mcp_workshops_field">';
         foreach($options as $option){
             $id = $option['id'];
             $location = $option['location'];
@@ -38,13 +38,13 @@ function create_webinar_shortcode() {
     $output = '';
     
     if(!empty($options)){
-        $output = '<select class="mcp_live_events">';
+        $output = '<select class="mcp_webinars_field">';
         foreach($options as $option){
-            $id = $option['id'];
+            $eventId = $option['eventId'];
             $location = $option['location'];
             $date = $option['date'];
             $time = date("g:iA", strtotime($option['time']));
-            $output .= '<option value="'.$id.'">'.$location.' - '.$date.' at '.$time.'</option>';
+            $output .= '<option value="'.$eventId.'">'.$location.' - '.$date.' at '.$time.'</option>';
         }
         $output .= '</select>';
     } else {
