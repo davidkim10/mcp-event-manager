@@ -26,23 +26,23 @@ function mcp_plugin_settings_link( $links ) {
 }
 
 class MCP {
-	const URL_PATH_ADMIN_HOME= 'mcp-workshops-and-webinars';
-	const URL_PATH_WORKSHOPS= 'mcp-add-workshops';
-	const URL_PATH_WEBINARS= 'mcp-add-webinars';
-	const KEY_WORKSHOPS = 'mcp_workshops';
-	const KEY_WEBINARS = 'mcp_webinars';
-	const DB_KEY_WORKSHOPS = "cf7_mcp_workshops";
-	const DB_KEY_WEBINARS = "cf7_mcp_webinars";
-	private static $instance;
-	private function __construct() {
-	  // constructor code here
-	}
-	public static function get_instance() {
-	  if ( ! isset( self::$instance ) ) {
-		  self::$instance = new self();
-	  }
-	  return self::$instance;
-	}
+  const URL_PATH_ADMIN_HOME= 'mcp-workshops-and-webinars';
+  const URL_PATH_WORKSHOPS= 'mcp-add-workshops';
+  const URL_PATH_WEBINARS= 'mcp-add-webinars';
+  const KEY_WORKSHOPS = 'mcp_workshops';
+  const KEY_WEBINARS = 'mcp_webinars';
+  const DB_KEY_WORKSHOPS = "cf7_mcp_workshops";
+  const DB_KEY_WEBINARS = "cf7_mcp_webinars";
+  
+  private static $instance;
+  private function __construct() {}
+  
+  public static function get_instance() {
+    if ( ! isset( self::$instance ) ) {
+      self::$instance = new self();
+    }
+    return self::$instance;
+  }
 }
 
 // Store the instance in a global variable
