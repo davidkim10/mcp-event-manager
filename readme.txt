@@ -14,10 +14,9 @@ This plugin was designed to helped MCP manage their workshops and webinars. Spec
 
 == Installation ==
 
-1. Upload the `simple-webinar-workshop-management` folder to the `/wp-content/plugins/` directory
+1. Upload the `mcp-event-manager` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Set up your webinars and workshops through the settings page
-4. Use the shortcodes `[workshops]` and `[webinars]` to display registration forms
+3. Set up your webinars and workshops through by navigation to the plugin settings page ("Workshops")
 
 == Frequently Asked Questions ==
 
