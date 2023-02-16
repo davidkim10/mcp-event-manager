@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'mcp_plugin_settings_link');
 
 function mcp_plugin_settings_link( $links ) {
-    $settings_link = '<a href="' . admin_url( 'admin.php?page=mcp-plugin-settings' ) . '">' . __( 'Settings', 'mcp-plugin' ) . '</a>';
-    array_splice( $links, count( $links ) - 1, 0, $settings_link );
-    return $links;
+  $settings_link = '<a href="' . admin_url( 'admin.php?page=mcp-plugin-settings' ) . '">' . __( 'Settings', 'mcp-plugin' ) . '</a>';
+  array_splice( $links, count( $links ) - 1, 0, $settings_link );
+  return $links;
 }
 
 class MCP {
@@ -39,7 +39,7 @@ class MCP {
 	}
 	public static function get_instance() {
 	  if ( ! isset( self::$instance ) ) {
-		self::$instance = new self();
+		  self::$instance = new self();
 	  }
 	  return self::$instance;
 	}
