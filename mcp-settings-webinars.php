@@ -14,9 +14,9 @@ function register_mcp_admin_settings_webinars() {
 }
 
 function admin_settings_webinars() {
-    global $mcp_cf7;
-    $optionKey = $mcp_cf7::DB_KEY_WEBINARS;
-    $shortcode = $mcp_cf7::KEY_WEBINARS;
+    global $wp_mcp;
+    $optionKey = $wp_mcp::DB_KEY_WEBINARS;
+    $shortcode = $wp_mcp::KEY_WEBINARS;
     $options = get_option($optionKey);
     $num_rows = is_array($options) ? count($options) : 0;
     ?>

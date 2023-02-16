@@ -1,7 +1,7 @@
 <?php
-global $mcp_cf7;
-$workshop_shortcode_key = $mcp_cf7::KEY_WORKSHOPS;
-$webinar_shortcode_key = $mcp_cf7::KEY_WEBINARS;
+global $wp_mcp;
+$workshop_shortcode_key = $wp_mcp::KEY_WORKSHOPS;
+$webinar_shortcode_key = $wp_mcp::KEY_WEBINARS;
 add_shortcode($workshop_shortcode_key, 'create_workshop_shortcode');
 add_shortcode($webinar_shortcode_key, 'create_webinar_shortcode');
 
@@ -25,15 +25,15 @@ function create_select_field($options, $option_key, $id_key, $defaultOptionClass
 }
 
 function create_workshop_shortcode() {
-    global $mcp_cf7;
+    global $wp_mcp;
     $option_key = 'mcp_workshops_field';
-    $options = get_option($mcp_cf7::DB_KEY_WORKSHOPS);
+    $options = get_option($wp_mcp::DB_KEY_WORKSHOPS);
     return create_select_field($options, $option_key, 'id', $option_key . ' mcp-empty');
 }
 
 function create_webinar_shortcode() {
-    global $mcp_cf7;
+    global $wp_mcp;
     $option_key = 'mcp_webinars_field';
-    $options = get_option($mcp_cf7::DB_KEY_WEBINARS);
+    $options = get_option($wp_mcp::DB_KEY_WEBINARS);
     return create_select_field($options, $option_key, 'eventId', $option_key . ' mcp-empty');
 }

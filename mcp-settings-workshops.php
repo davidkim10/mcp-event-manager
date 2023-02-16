@@ -14,9 +14,9 @@ function register_mcp_admin_settings_workshops() {
 }
 
 function admin_settings_workshops() {
-    global $mcp_cf7;
-    $optionKey = $mcp_cf7::DB_KEY_WORKSHOPS;
-    $shortcode = $mcp_cf7::KEY_WORKSHOPS;
+    global $wp_mcp;
+    $optionKey = $wp_mcp::DB_KEY_WORKSHOPS;
+    $shortcode = $wp_mcp::KEY_WORKSHOPS;
     $options = get_option($optionKey);
     $num_rows = is_array($options) ? count($options) : 0;
     $tooltipMsg = 'All form fields are required or the event will not save in the database.';

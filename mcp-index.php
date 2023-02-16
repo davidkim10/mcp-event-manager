@@ -46,8 +46,8 @@ class MCP {
 }
 
 // Store the instance in a global variable
-global $mcp_cf7;
-$mcp_cf7 = MCP::get_instance();
+global $wp_mcp;
+$wp_mcp = MCP::get_instance();
 
 require_once plugin_dir_path( __FILE__ ) . 'mcp-scripts-loader.php';
 require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-admin.php';

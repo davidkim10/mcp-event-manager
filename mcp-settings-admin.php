@@ -14,9 +14,9 @@ function mcp_add_admin_menus() {
 }
 
 function render_admin_template() {
-    global $mcp_cf7;
-    $option_key_workshops = $mcp_cf7::DB_KEY_WORKSHOPS;
-    $option_key_webinars = $mcp_cf7::DB_KEY_WEBINARS;
+    global $wp_mcp;
+    $option_key_workshops = $wp_mcp::DB_KEY_WORKSHOPS;
+    $option_key_webinars = $wp_mcp::DB_KEY_WEBINARS;
 
     $workshops = get_option( $option_key_workshops);
     $webinars = get_option( $option_key_webinars);
