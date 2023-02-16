@@ -1,66 +1,67 @@
-function toggle_table_remove_btn() {
-  var rows = jQuery(".custom-field-row");
-  var btn = jQuery(".custom-field-row:not(.db_exist) .cf7-remove-field");
-  if (rows.length > 1) {
-    btn.fadeIn(100);
-  } else {
-    btn.fadeOut(300);
-  }
-}
-
-function mcp_remove_event(e) {
-  e.preventDefault();
-  var $ = jQuery;
-  var optionKey = e.target.dataset.scope;
-  var tableRow = $(e.currentTarget).closest(".custom-field-row");
-  var tableRows = $(".custom-field-row");
-  var rowId = tableRow.data("id");
-
-  if (!rowId) {
-    switch (true) {
-      case tableRows.length > 1:
-        tableRow.remove();
-        break;
-      case tableRows.length === 1 && !mcp_alerts.isVisible():
-        mcp_alerts.warn("Hmm there should be at least one row in the table");
-        break;
-    }
-    return;
-  }
-
-  var confirmRemove = confirm("Are you sure you want to remove this event?");
-  if (confirmRemove) {
-    AJAX_REMOVE_EVENT(rowId, optionKey, function () {
-      tableRow.remove();
-    });
-  }
-}
-
-function mcp_save_events(e) {
-  e.preventDefault();
-  var $ = jQuery;
-  var DATA = [];
-  var OPTION_KEY = e.target.dataset.scope;
-  var shouldSaveEvents = false;
-  $("tbody tr").each(function () {
-    var dataItem = {
-      location: $(this).find('input[name="cf7_custom_field_name[]"]').val(),
-      eventId: $(this).find('input[name="cf7_custom_field_eventId[]"]').val(),
-      date: $(this).find('input[name="cf7_custom_field_date[]"]').val(),
-      time: $(this).find('input[name="cf7_custom_field_time[]"]').val(),
+class MCPEvents {
+  constructor() {
+    this.api = new MCPApi();
+    this.fields = {
+      location: 'input[name="cf7_custom_field_name[]"]',
+      eventId: 'input[name="cf7_custom_field_eventId[]"]',
+      date: 'input[name="cf7_custom_field_date[]"]',
+      time: 'input[name="cf7_custom_field_time[]"]',
     };
-    var hasEmptyVal = mcp_utils.objHasEmptyVal(dataItem);
-    hasEmpty = hasEmptyVal;
-
-    if (!hasEmptyVal) {
-      DATA.push(dataItem);
-    }
-    shouldSaveEvents = DATA.length && !hasEmptyVal;
-  });
-
-  if (shouldSaveEvents) {
-    AJAX_SAVE_EVENTS(DATA, OPTION_KEY);
-  } else {
-    mcp_alerts.error("All fields are required");
   }
+
+  getOptionKey(e) {
+    return e.target.dataset.scope;
+  }
+
+  remove = (e) => {
+    e.preventDefault();
+    const optionKey = this.getOptionKey(e);
+    const tableRow = e.target.closest(".custom-field-row");
+    const tableRows = document.querySelectorAll(".custom-field-row");
+    const rowId = tableRow.dataset.id;
+    const isDraft = !rowId;
+    const isTableMultiRow = tableRows.length > 1;
+    const isTableSingleRow = tableRows.length === 1;
+    const isAlertVisible = MCPAlerts.isVisible();
+    const msg_warn = "Hmm there should be at least one row in the table";
+    const msg_confirm = "Are you sure you want to remove this event?";
+
+    if (isDraft) {
+      if (isTableMultiRow) tableRow.remove();
+      if (isTableSingleRow && !isAlertVisible) mcp_alerts.warn(msg_warn);
+      return;
+    }
+
+    if (confirm(msg_confirm)) {
+      this.api.removeEvent(rowId, optionKey, () => tableRow.remove());
+    }
+  };
+
+  save = (e) => {
+    e.preventDefault();
+    const data = [];
+    const optionKey = this.getOptionKey(e);
+    const msg_error = "All fields are required";
+    const tableRows = document.querySelectorAll("tbody tr");
+    let shouldSave = true;
+
+    for (const row of tableRows) {
+      const item = {
+        location: row.querySelector(this.fields.location).value,
+        eventId: row.querySelector(this.fields.eventId).value,
+        date: row.querySelector(this.fields.date).value,
+        time: row.querySelector(this.fields.time).value,
+      };
+      const hasEmptyVal = MCPUtils.objHasEmptyValues(item);
+      if (hasEmptyVal) {
+        shouldSave = false;
+        break;
+      } else {
+        data.push(item);
+      }
+    }
+
+    if (shouldSave) this.api.saveEvents(data, optionKey);
+    else mcp_alerts.error(msg_error);
+  };
 }
