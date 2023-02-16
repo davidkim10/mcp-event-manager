@@ -26,14 +26,24 @@ class MCPEvents {
     const msg_warn = "Hmm there should be at least one row in the table";
     const msg_confirm = "Are you sure you want to remove this event?";
 
+    function warningAlertLastRow() {
+      !isAlertVisible && mcp_alerts.warn(msg_warn);
+    }
+
+    function onRemoveSuccess() {
+      const reload = () => setTimeout(() => window.location.reload(), 1500);
+      tableRow.remove();
+      isTableSingleRow && reload();
+    }
+
     if (isDraft) {
       if (isTableMultiRow) tableRow.remove();
-      if (isTableSingleRow && !isAlertVisible) mcp_alerts.warn(msg_warn);
+      if (isTableSingleRow) warningAlertLastRow();
       return;
     }
 
     if (confirm(msg_confirm)) {
-      this.api.removeEvent(rowId, optionKey, () => tableRow.remove());
+      this.api.removeEvent(rowId, optionKey, onRemoveSuccess);
     }
   };
 
