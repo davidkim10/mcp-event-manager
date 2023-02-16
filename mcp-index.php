@@ -49,7 +49,7 @@ class MCP {
 global $mcp_cf7;
 $mcp_cf7 = MCP::get_instance();
 
-require_once plugin_dir_path( __FILE__ ) . 'mcp-loader.php';
+require_once plugin_dir_path( __FILE__ ) . 'mcp-scripts-loader.php';
 require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-admin.php';
 require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-workshops.php'; 
 require_once plugin_dir_path( __FILE__ ) . 'mcp-settings-webinars.php'; 
