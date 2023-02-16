@@ -11,12 +11,12 @@ class WPMCP_Utils {
         }
       },
       targets: {
-        live: document.querySelector(".mcp_workshops_target"),
-        webinar: document.querySelector(".mcp_webinars_target"),
+        workshop: ".mcp_workshops_target",
+        webinar: ".mcp_webinars_target",
       },
       source: {
-        live: document.querySelector(".mcp_live_events"),
-        webinar: document.querySelector(".mcp_webinar_events"),
+        workshop: ".mcp_workshops_field",
+        webinar: ".mcp_webinars_field",
       },
     };
   }
@@ -24,8 +24,10 @@ class WPMCP_Utils {
   init() {
     const keys = Object.keys(this.select.targets);
     keys.forEach((key) => {
-      const target = this.select.targets[key];
-      const source = this.select.source[key];
+      const targetClassName = this.select.targets[key];
+      const sourceClassName = this.select.source[key];
+      const target = document.querySelector(targetClassName);
+      const source = document.querySelector(sourceClassName);
       this.select.assign(target, source);
     });
   }
