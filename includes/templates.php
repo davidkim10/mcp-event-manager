@@ -27,24 +27,27 @@ function render_shortcode_section($shortcode) {
 } 
 
 function render_table_row($option, $num_rows, $className = "") {
-    $class = $className ? ' ' . $className : '';
-    $rowId = isset($option['rowId']) ? $option['rowId'] : "";
-    
+    $class = $className ? ' ' . esc_attr($className) : '';
+    $rowId = isset($option['rowId']) ? esc_attr($option['rowId']) : "";
+    $html = '<tr class="custom-field-row' . $class .'" data-id="' . $rowId . '">';
     $input_fields = [
         'location' => ['type' => 'text', 'name' => 'cf7_custom_field_name', 'placeholder' => 'Location'],
         'eventId' => ['type' => 'text', 'name' => 'cf7_custom_field_eventId', 'placeholder' => 'Event ID'],
         'date' => ['type' => 'date', 'name' => 'cf7_custom_field_date', 'placeholder' => ''],
-        'time' => ['type' => 'time', 'name' => 'cf7_custom_field_time', 'placeholder' => '',]
+        'time' => ['type' => 'time', 'name' => 'cf7_custom_field_time', 'placeholder' => '']
     ];
     
-    $html = '<tr class="custom-field-row' . $class .'" data-id="' . $rowId . '">';
-    
     foreach ($input_fields as $key => $field) {
-        $value = isset($option[$key]) ? $option[$key] : '';
-        $html .= '<td><input required type="' . $field['type'] . '" name="' . $field['name'] . '[]" value="' . $value . '" placeholder="' . $field['placeholder'] . '"></td>';
+        $value = isset($option[$key]) ? esc_attr($option[$key]) : '';
+        $type = esc_attr($field['type']);
+        $name = esc_attr($field['name']) . '[]';
+        $placeholder = esc_attr($field['placeholder']);
+        $html .= '<td><input required type="' . $type . '" name="' . $name . '" value="' . $value . '" placeholder="' . $placeholder . '"></td>';
     }
-    
-    $html .= '<td><button class="cf7-remove-field button-secondary ' . ($num_rows > 1 ? 'visible' : 'hide') . '">Remove</button></td>';
+
+    $remove_button_class = ($num_rows > 1) ? 'visible' : 'hide';
+    $remove_button_classes = 'cf7-remove-field button-secondary ' . esc_attr($remove_button_class);
+    $html .= '<td><button class="' . $remove_button_classes . '">Remove</button></td>';
     $html .= '</tr>';
     return $html;
 }

@@ -1,6 +1,6 @@
 // AJAX functions to update events
 function AJAX_REMOVE_EVENT(rowId, optionKey, callback) {
-  var ENDPOINT = mcp_ajax_object.ajax_url;
+  var ENDPOINT = mcp_ajax_config.ajax_url;
   var DATA = {
     action: "cf7_remove_field",
     rowId: rowId,
@@ -30,7 +30,7 @@ function AJAX_REMOVE_EVENT(rowId, optionKey, callback) {
 }
 
 function AJAX_SAVE_EVENTS(data, optionKey) {
-  var ENDPOINT = mcp_ajax_object.ajax_url;
+  var ENDPOINT = mcp_ajax_config.ajax_url;
   function handleSaveSuccess(response) {
     console.log("success", response);
     mcp_alerts.add("Event saved successfully!");
