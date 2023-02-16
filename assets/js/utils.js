@@ -37,6 +37,9 @@ var mcp_alerts = {
 var mcp_utils = {
   isEmptyRow: _mcp_isEmptyRow,
   getEmptyRows: _mcp_getEmptyRows,
+  objHasEmptyVal: function (obj) {
+    return Object.values(obj).some((val) => !val);
+  },
 };
 
 function mcpCopyToClipBoard(event) {

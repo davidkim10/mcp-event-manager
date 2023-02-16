@@ -20,7 +20,8 @@ function load_admin_css() {
 
 function load_admin_js() {
     wp_enqueue_script( 'mcp-utils', get_asset('/assets/js/utils.js'), array( 'jquery' ), '1.0', true );
-    wp_enqueue_script( 'mcp-scripts', get_asset('/assets/js/scripts.js'), array( 'jquery', 'mcp-utils' ), '1.0', true );
+    wp_enqueue_script( 'mcp-db', get_asset('/assets/js/db.js'), array( 'jquery' ), '1.0', true );
+    wp_enqueue_script( 'mcp-scripts', get_asset('/assets/js/scripts.js'), array( 'jquery', 'mcp-utils', 'mcp-db' ), '1.0', true );
     wp_localize_script( 'mcp-scripts', 'mcp_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
     wp_enqueue_script( 'mcp-js-init', get_asset('/assets/js/init.js', __FILE__ ), array( 'jquery', 'mcp-scripts' ), '1.0', true );
 }

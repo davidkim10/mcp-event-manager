@@ -8,7 +8,7 @@ function mcp_add_admin_menus() {
         'manage_options',
         'mcp-workshops-and-webinars',
         'mcp_admin_settings',
-        'dashicons-email',
+        'dashicons-calendar',
         80
     );
 }
@@ -31,15 +31,12 @@ function render_admin_template() {
 
     <div class="mcp-admin-home">
         <div class="container">
-            <header>
+            <header style="margin-bottom: 20px;">
                 <h1>Event Manager</h1>
             </header>
-            <section>
-                <h2>Workshops & Webinars</h2>
-                <p>This plugin was designed to help team members maintain webinars and workshops on MyCollegePlan.com.</p>
-            </section>
+            <p>This plugin was designed to help team members maintain webinars and workshops on MyCollegePlan.com.</p>
             <section style="padding-bottom:50px; border-bottom: solid 1px #ccc;">
-                <h2>Event Overview</h2>
+                <h2>Overview</h2>
                 <table class="wp-list-table widefat fixed striped font-md td-align-center">
                     <thead>
                         <tr>
@@ -52,12 +49,12 @@ function render_admin_template() {
                     <tr>
                         <td>Workshops</td>
                         <td>Active Events: <?php echo $workshopsCount ;?> </td>
-                        <td><a class="button-primary" href="<?php echo esc_url($workshops_page_url); ?>">Manage Events</a></td>
+                        <td><a class="button-primary" href="<?php echo esc_url($workshops_page_url); ?>">Manage</a></td>
                     </tr>
                     <tr>
                         <td>Webinars</td>
                         <td>Active Events: <?php echo $webinarsCount ;?> </td>
-                        <td><a class="button-primary" href="<?php echo esc_url($webinars_page_url); ?>">Manage Events</a></td>
+                        <td><a class="button-primary" href="<?php echo esc_url($webinars_page_url); ?>">Manage</a></td>
                     </tr>
                     </tbody>
                 </table>

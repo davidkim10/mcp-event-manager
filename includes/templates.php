@@ -28,11 +28,22 @@ function render_shortcode_section($shortcode) {
 
 function render_table_row($option, $num_rows, $className = "") {
     $class = $className ? ' ' . $className : '';
-    $html = '<tr class="custom-field-row' . $class . '">';
-    $html .= '<td><input required type="text" name="cf7_custom_field_name[]" value="' . $option['location'] . '" placeholder="Location"></td>';
-    $html .= '<td><input required type="text" name="cf7_custom_field_id[]" value="' . $option['id'] . '" placeholder="Event ID"></td>';
-    $html .= '<td><input required type="date" name="cf7_custom_field_date[]" value="' . $option['date'] . '"></td>';
-    $html .= '<td><input required type="time" name="cf7_custom_field_time[]" value="' . $option['time'] . '"></td>';
+    $rowId = isset($option['rowId']) ? $option['rowId'] : "";
+    
+    $input_fields = [
+        'location' => ['type' => 'text', 'name' => 'cf7_custom_field_name', 'placeholder' => 'Location'],
+        'eventId' => ['type' => 'text', 'name' => 'cf7_custom_field_eventId', 'placeholder' => 'Event ID'],
+        'date' => ['type' => 'date', 'name' => 'cf7_custom_field_date', 'placeholder' => ''],
+        'time' => ['type' => 'time', 'name' => 'cf7_custom_field_time', 'placeholder' => '',]
+    ];
+    
+    $html = '<tr class="custom-field-row' . $class .'" data-id="' . $rowId . '">';
+    
+    foreach ($input_fields as $key => $field) {
+        $value = isset($option[$key]) ? $option[$key] : '';
+        $html .= '<td><input required type="' . $field['type'] . '" name="' . $field['name'] . '[]" value="' . $value . '" placeholder="' . $field['placeholder'] . '"></td>';
+    }
+    
     $html .= '<td><button class="cf7-remove-field button-secondary ' . ($num_rows > 1 ? 'visible' : 'hide') . '">Remove</button></td>';
     $html .= '</tr>';
     return $html;
@@ -58,7 +69,7 @@ function render_table($options, $num_rows = 0, $type = "workshops") {
                     <?php echo render_table_row($option, 2, "db_exist"); ?>
                 <?php endforeach; ?>
             <?php else : ?>
-                <?php $option = array('location' => $location, 'id' => '', 'date' => '', 'time' => ''); ?>
+                <?php $option = array('location' => $location, 'eventId' => '', 'date' => '', 'time' => ''); ?>
                 <?php echo render_table_row($option, $num_rows); ?>
             <?php endif; ?>
         </tbody>

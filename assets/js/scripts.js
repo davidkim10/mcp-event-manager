@@ -11,90 +11,56 @@ function toggle_table_remove_btn() {
 function mcp_remove_event(e) {
   e.preventDefault();
   var $ = jQuery;
-  var remove_button = $(e.currentTarget);
-  var row = remove_button.closest(".custom-field-row");
-  var id = row.find('input[name="cf7_custom_field_id[]"]').val();
   var optionKey = e.target.dataset.scope;
+  var tableRow = $(e.currentTarget).closest(".custom-field-row");
+  var tableRows = $(".custom-field-row");
+  var rowId = tableRow.data("id");
 
-  if (id) {
-    var isConfirmed = confirm("Are you sure you want to remove this event?");
-    if (!isConfirmed) return;
-    $.ajax({
-      type: "POST",
-      url: mcp_ajax_object.ajax_url,
-      data: { action: "cf7_remove_field", id: id, optionKey: optionKey },
-      success: function (response) {
-        console.log("response", response.data);
-        if (response.success) {
-          row.remove();
-          mcp_alerts.add("Event removed");
-        } else {
-          mcp_alerts.error("Error removing event:" + response.data);
-        }
-      },
-      error: function (error) {
-        mcp_alerts.error("Error removing your event");
-        console.log("Error:", error);
-      },
-    });
-  } else {
-    if ($(".custom-field-row").length > 1) {
-      row.remove();
-    } else {
-      if (!mcp_alerts.isVisible()) {
+  if (!rowId) {
+    switch (true) {
+      case tableRows.length > 1:
+        tableRow.remove();
+        break;
+      case tableRows.length === 1 && !mcp_alerts.isVisible():
         mcp_alerts.warn("Hmm there should be at least one row in the table");
-      }
+        break;
     }
+    return;
+  }
+
+  var confirmRemove = confirm("Are you sure you want to remove this event?");
+  if (confirmRemove) {
+    AJAX_REMOVE_EVENT(rowId, optionKey, function () {
+      tableRow.remove();
+    });
   }
 }
 
 function mcp_save_events(e) {
   e.preventDefault();
   var $ = jQuery;
-  var data = [];
-  var optionKey = e.target.dataset.scope;
-  var hasEmpty = false;
+  var DATA = [];
+  var OPTION_KEY = e.target.dataset.scope;
+  var shouldSaveEvents = false;
   $("tbody tr").each(function () {
-    var location = $(this).find('input[name="cf7_custom_field_name[]"]').val();
-    var id = $(this).find('input[name="cf7_custom_field_id[]"]').val();
-    var date = $(this).find('input[name="cf7_custom_field_date[]"]').val();
-    var time = $(this).find('input[name="cf7_custom_field_time[]"]').val();
+    var dataItem = {
+      location: $(this).find('input[name="cf7_custom_field_name[]"]').val(),
+      eventId: $(this).find('input[name="cf7_custom_field_eventId[]"]').val(),
+      date: $(this).find('input[name="cf7_custom_field_date[]"]').val(),
+      time: $(this).find('input[name="cf7_custom_field_time[]"]').val(),
+    };
+    var hasEmptyVal = mcp_utils.objHasEmptyVal(dataItem);
+    hasEmpty = hasEmptyVal;
 
-    if ([location, id, date, time].filter(Boolean).length === 4) {
-      data.push({
-        location: location,
-        id: id,
-        date: date,
-        time: time,
-      });
-    } else {
-      hasEmpty = true;
-      return false;
+    if (!hasEmptyVal) {
+      DATA.push(dataItem);
     }
+    shouldSaveEvents = DATA.length && !hasEmptyVal;
   });
 
-  if (!data.length || hasEmpty) {
+  if (shouldSaveEvents) {
+    AJAX_SAVE_EVENTS(DATA, OPTION_KEY);
+  } else {
     mcp_alerts.error("All fields are required");
-    return;
   }
-  $.ajax({
-    type: "POST",
-    url: mcp_ajax_object.ajax_url,
-    data: {
-      action: "cf7_save_fields",
-      data: data,
-      optionKey: optionKey,
-    },
-    success: function (response) {
-      console.log("success", response);
-      mcp_alerts.add("Event saved successfully... page will refresh");
-      setTimeout(function () {
-        window.location.reload();
-      }, 2500);
-    },
-    error: function (error) {
-      mcp_alerts.error("There was an error saving your event:" + error);
-      console.log(error);
-    },
-  });
 }

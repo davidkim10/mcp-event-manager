@@ -2,30 +2,40 @@
 add_action('wp_ajax_cf7_remove_field', 'cf7_remove_field');
 add_action('wp_ajax_cf7_save_fields', 'cf7_save_fields');
 
+function createID() {
+    $timestamp = microtime(true);
+    $id = uniqid($timestamp);
+    $id = preg_replace("/[^a-zA-Z0-9]/", "", $id);
+    return $id;
+}
+
+
 function cf7_save_fields() {
-    $data = $_POST['data'];
-    $optionKey = $_POST['optionKey'];
+    $DATA = $_POST['data'];
+    $OPTION_KEY = $_POST['optionKey'];
     $options = array();
         
-    if(!$optionKey) {
+    if(!$OPTION_KEY) {
         wp_send_json_error('optionKey missing');
         wp_die();
     }
     
-    foreach($data as $field) {
+    foreach($DATA as $field) {
         $options[] = array(
+            'rowId' => createID(),
             'location' => $field['location'],
-            'id' => $field['id'],
+            'eventId' => $field['eventId'],
             'date' => $field['date'],
             'time' => $field['time']
         );
     }
-    update_option($optionKey, $options);
+    update_option($OPTION_KEY, $options);
+    wp_send_json_success(json_encode( $options));
     wp_die();
 }
 
 function cf7_remove_field() { 
-    $id = $_POST['id'];
+    $rowId = $_POST['rowId'];
     $optionKey = $_POST['optionKey'];
     
     if(!$optionKey) {
@@ -36,7 +46,7 @@ function cf7_remove_field() {
     $options = get_option($optionKey);
     if (!empty($options)) {
         foreach ($options as $index => $option) {
-            if ($option['id'] == $id) {
+            if ($option['rowId'] == $rowId) {
                 unset($options[$index]);
                 update_option($optionKey, $options);
                 wp_send_json_success("Event removed successfully");

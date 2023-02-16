@@ -2,7 +2,6 @@
 global $mcp_cf7;
 $workshop_shortcode_key = $mcp_cf7::KEY_WORKSHOPS;
 $webinar_shortcode_key = $mcp_cf7::KEY_WEBINARS;
-
 add_shortcode($workshop_shortcode_key, 'create_workshop_shortcode');
 add_shortcode($webinar_shortcode_key, 'create_webinar_shortcode');
 
