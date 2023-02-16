@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: CF7 Manage Events - MyCollegePlan
-Description: A cleaner UI to add events for CF7 for MyCollegePlan
+Plugin Name: MCP Event Manager
+Description: MCP extension to help manage workshops and webinars
 Version: 1.0.0
 Author: David K
 Author URI: https://davekim.io
