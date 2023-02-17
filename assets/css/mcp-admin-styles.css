@@ -72,6 +72,18 @@
   gap: 12px;
 }
 
+.cf7-mcp-tabs table.custom-fields-wrap tr th:first-child {
+  width: 25%;
+}
+
+.cf7-mcp-tabs .custom-fields-wrap .custom-field-row td:first-child > input {
+  width: 100%;
+}
+
+/* .cf7-mcp-tabs .custom-field-row td:first-child input {
+  width: 100%;
+} */
+
 /* .cf7-mcp-tabs .custom-field-row:hover .cf7-remove-field {
   opacity: 1;
 }

@@ -4,7 +4,7 @@ Contributors: David K
 Tags: webinar, workshop, registration
 Requires at least: 5.1
 Tested up to: 5.9
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,9 @@ Use the mcp_utils and initialize the shortcodes. Developer documentation can be 
 
 = 1.0.0 =
 * Initial release
+= 1.1.0 =
+* Updates to admin dashboard and utility functions to support CF7
+
 
 == Upgrade Notice ==
 
