@@ -51,7 +51,7 @@ function admin_settings_webinars() {
       $('.cf7-remove-field').attr('data-scope', '<?php echo $optionKey; ?>');
       $('.cf7-add-field').click(function(e) {
         e.preventDefault();
-        var tableRow = '<?php echo addslashes(render_table_row(array('location' => 'Zoom', 'id' => '', 'date' => '', 'time' => ''), 2)); ?>';
+        var tableRow = '<?php echo addslashes(render_table_row(array('location' => 'Webinar', 'id' => '', 'date' => '', 'time' => ''), 2)); ?>';
         $('table.custom-fields tbody').append(tableRow);
       });
     });

@@ -58,7 +58,7 @@ function render_table($options, $num_rows = 0, $type = "workshops") {
             return strtotime($a['date']) - strtotime($b['date']);
         });
     }
-    $location = $type == "webinars" ? "Zoom" : "";
+    $location = $type == "webinars" ? "Webinar" : "";
     ob_start();
 ?>
     <table class="wp-list-table widefat fixed striped custom-fields custom-fields-wrap">
