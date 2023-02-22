@@ -51,7 +51,8 @@ class MCPApi {
 
     const onSuccess = (res) => {
       console.log("success", res);
-      mcp_alerts.add("Event saved successfully!");
+      window.alert("Event saved successfully!");
+      window.location.reload();
     };
 
     const onError = (err) => {
