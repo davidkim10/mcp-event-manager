@@ -17,7 +17,6 @@ class MCPApi {
 
   removeEvent(rowId, optionKey, callback) {
     const ACTION = "cf7_remove_field";
-    const ENDPOINT = this.endpoint;
     const DATA = {
       action: ACTION,
       rowId,
@@ -42,7 +41,6 @@ class MCPApi {
 
   saveEvents(data, optionKey) {
     const ACTION = "cf7_save_fields";
-    const ENDPOINT = this.endpoint;
     const DATA = {
       action: ACTION,
       data,
