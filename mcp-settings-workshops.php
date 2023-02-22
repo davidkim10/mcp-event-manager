@@ -21,7 +21,6 @@ function admin_settings_workshops() {
   $shortcode = $wp_mcp::KEY_WORKSHOPS;
   $options = get_option($optionKey);
   $num_rows = is_array($options) ? count($options) : 0;
-  $tooltipMsg = 'All form fields are required or the event will not save in the database.';
 ?>
   <div class="cf7-mcp-tabs" style="padding: 40px 40px 0 20px;" data-scope="<?php echo $optionKey; ?>">
     <?php echo render_alert_container(); ?>
