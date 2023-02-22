@@ -2,7 +2,7 @@
 /*
 Plugin Name: MCP Event Manager
 Description: MCP extension to help manage workshops and webinars
-Version: 1.1.0
+Version: 1.2.0
 Author: David K
 Author URI: https://davekim.io
 

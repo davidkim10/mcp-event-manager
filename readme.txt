@@ -31,6 +31,8 @@ Use the mcp_utils and initialize the shortcodes. Developer documentation can be 
 * Initial release
 = 1.1.0 =
 * Updates to admin dashboard and utility functions to support CF7
+= 1.2.0 =
+* Sort and render table by event date
 
 
 == Upgrade Notice ==

@@ -86,7 +86,7 @@ function render_admin_template() {
           </tbody>
         </table>
         <pre><code class="language-php">// Initalize Example
-jQuery('document').ready(function() {
+jQuery(document).ready(function() {
     wpmcp_utils.select.init()
 });</code></pre>
         <h3 style="margin-top: 30px;">- Dependencies</h3>
