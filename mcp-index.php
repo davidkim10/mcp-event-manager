@@ -1,15 +1,14 @@
 <?php
 /*
-Plugin Name: MCP Event Manager
-Description: MCP extension to help manage workshops and webinars
-Version: 1.2.0
-Author: David K
-Author URI: https://davekim.io
-
-License: MIT
-License URI: https://opensource.org/licenses/MIT
-
-Requires PHP: 7.4
+ * Plugin Name: MCP Event Manager
+ * Description: MCP extension to help manage workshops and webinars
+ * Version: 1.2.0
+ * Requires at least: 5.2
+ * Requires PHP: 7.4
+ * Author: David K
+ * Author URI: https://davekim.io
+ * License: MIT
+ * License URI: https://opensource.org/licenses/MIT
 */
 
 if (!defined('ABSPATH')) {
