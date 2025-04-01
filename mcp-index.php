@@ -2,7 +2,7 @@
 /*
  * Plugin Name: MCP Event Manager
  * Description: MCP extension to help manage workshops and webinars
- * Version: 1.2.0
+ * Version: 1.3.0
  * Requires at least: 5.2
  * Requires PHP: 7.4
  * Author: David K

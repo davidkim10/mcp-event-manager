@@ -33,6 +33,8 @@ Use the mcp_utils and initialize the shortcodes. Developer documentation can be 
 * Updates to admin dashboard and utility functions to support CF7
 = 1.2.0 =
 * Sort and render table by event date
+= 1.3.0 =
+* Add ability to view all webinars and workshops in HTML table view. Use [view_workshops] and [view_webinars]
 
 
 == Upgrade Notice ==
