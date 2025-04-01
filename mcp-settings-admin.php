@@ -59,8 +59,32 @@ function render_admin_template() {
         </table>
       </section>
       <section style="margin-top: 75px;">
+        <h2>View All Workshops and Webinars</h2>
+        <p>You can view all workshops and webinars by using the following shortcodes below. They will display all active events in a table format with a register button.</p>
+        <table class="wp-list-table widefat fixed striped">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Shortcode</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Workshop</td>
+              <td>[view_workshops]</td>
+            </tr>
+            <tr>
+              <td>Webinars</td>
+              <td>[view_webinars]</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section style="margin-top: 75px;">
         <h2>Developer Documentation</h2>
         <p>The Event Manager plugin generates shortcodes that produce select elements with options formatted for web forms tailored to the specific business use case. To map the corresponding dropdown items to Contact Form 7, the shortcode should be initialized with the utility function(s) provided by the plugin. The shortcode syntax can be found under each table in its respective view.</p>
+
+        <p>Alternatively, if you are using Contact Form 7, you can use the <a href="https://github.com/davidkim10/mcp-event-manager-cf7-integration" target="_blank" title="view plugin repository">mcp-cf7-integration plugin</a> to map the dropdown elements. You will be able to add the form tags directly in the CF7 form settings page. <strong>You do not need to use the utility functions if you choose this option.</strong></p>
 
         <h3 style="margin-top: 30px;">- Initialize the Fields</h3>
         <p>If you are using Contact Form 7, the utility functions to map the dropdown elements can be used when the page loads. Apply the specified class names to target your select elements.</p>
@@ -91,9 +115,9 @@ jQuery(document).ready(function() {
 });</code></pre>
         <h3 style="margin-top: 30px;">- Dependencies</h3>
         <p>jQuery is required for this plugin to operate correctly.</p>
-        <p>This plugin will not work for browsers that use IE11.</p>
+        <p>This plugin is not fully supported or guaranteed to work for browsers that use IE11.</p>
         <h3 style="margin-top: 30px;">- Plugin Updates</h3>
-        <p>This plugin will receive updates from its repository located on GitHub.</p>
+        <p>This plugin will receive updates from its repository located on <a href="https://github.com/davidkim10/mcp-event-manager-cf7-integration" target="_blank" title="Visit GitHub">GitHub</a>.</p>
       </section>
     </div>
   </div>
