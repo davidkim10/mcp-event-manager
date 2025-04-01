@@ -1,6 +1,5 @@
 <?php
-// Load Assets
-// The PHP_INT_MAX constant tells WordPress to load this plugin last
+add_action('wp_enqueue_scripts', 'load_public_css', PHP_INT_MAX);
 add_action('wp_enqueue_scripts', 'load_public_js', PHP_INT_MAX);
 add_action('admin_enqueue_scripts', 'load_admin_js', PHP_INT_MAX);
 add_action('admin_enqueue_scripts', 'load_admin_css');
@@ -9,11 +8,15 @@ function get_asset($str) {
     return plugins_url($str, __FILE__);
 }
 
+function load_public_css() {
+    wp_enqueue_style('mcp-public-styles', get_asset('/assets/css/mcp-public-styles.css'));
+}
+
 function load_public_js() {
     wp_enqueue_script('mcp-public-utils', get_asset('/assets/public/utils.js'), array('jquery'), '1.2', true);
 }
 
-// START WP ADMIN ONLY 
+// --- WP ADMIN ONLY ---
 function load_admin_css() {
     wp_enqueue_style('mcp-admin-styles', get_asset('/assets/css/mcp-admin-styles.css'));
 }
@@ -26,4 +29,3 @@ function load_admin_js() {
     wp_enqueue_script('mcp-admin-init', get_asset('/assets/js/init.js', __FILE__), array('jquery', 'mcp-admin-events'), '1.2', true);
     wp_localize_script('mcp-admin-db', 'mcp_ajax_config', array('endpoint' => admin_url('admin-ajax.php')));
 }
-// END WP ADMIN ONLY
