@@ -27,30 +27,35 @@ function create_select_field($options, $option_key, $id_key, $defaultOptionClass
     return $output;
 }
 
-function cf7_mcp_generate_events_table($events, $type = 'workshops') {
-    $output  = '<table class="table-striped mcp-table mcp-table-' . $type . '">';
+function create_events_table($events, $eventType = 'workshops') {
+    $output  = '<div class="mcp-table-wrapper">';
+    $output .= '<table class="table-striped mcp-table mcp-table-' . $eventType . '">';
     $output .= '<thead><tr><th>Location</th><th>Date</th><th>Time</th><th>---</th></tr></thead>';
     $output .= '<tbody>';
-    foreach ($events as $event) {
-        // Ensure required keys exist.
-        if (! isset($event['eventId'], $event['location'], $event['date'], $event['time'])) {
-            continue;
-        }
-        $id       = sanitize_text_field($event['eventId']);
-        $location = sanitize_text_field($event['location']);
-        $date     = date("m/d/Y", strtotime($event['date']));
-        $time     = date("g:iA", strtotime(sanitize_text_field($event['time'])));
-        $location_label = $location . ' - ' . $date . ' at ' . $time;
-        $href     = '/lp-free-college-planning-webinar?type=' . $type . '&eventId=' . $id . '&location=' . urlencode($location_label);
 
-        $output .= '<tr class="mcp-item" data-event-id="' . esc_attr($id) . '">';
-        $output .= '<td class="mcp-location">' . esc_html($location) . '</td>';
-        $output .= '<td class="mcp-date">' . esc_html($date) . '</td>';
-        $output .= '<td class="mcp-time">' . esc_html($time) . '</td>';
-        $output .= '<td style="text-align: center;"><a class="btn btn-color-primary btn-size-extra-small" href="' . $href . '" class="mcp-register-link link"><strong>Register</strong></a></td>';
-        $output .= '</tr>';
+    if (empty($events) || !is_array($events)) {
+        $output .= '<tr class="mcp-empty mcp-empty-' . $eventType . '"><td colspan="4" style="font-size: 16px; padding: 48px 12px;">--- No events available at this time ---</td></tr>';
+    } else {
+        foreach ($events as $event) {
+            if (! isset($event['eventId'], $event['location'], $event['date'], $event['time'])) {
+                continue;
+            }
+            $id       = sanitize_text_field($event['eventId']);
+            $location = sanitize_text_field($event['location']);
+            $date     = date("m/d/Y", strtotime($event['date']));
+            $time     = date("g:iA", strtotime(sanitize_text_field($event['time'])));
+            $location_label = $location . ' - ' . $date . ' at ' . $time;
+            $href     = '/lp-free-college-planning-webinar?type=' . $eventType . '&eventId=' . $id . '&location=' . urlencode($location_label);
+
+            $output .= '<tr class="mcp-item" data-event-id="' . esc_attr($id) . '">';
+            $output .= '<td class="mcp-location">' . esc_html($location) . '</td>';
+            $output .= '<td class="mcp-date">' . esc_html($date) . '</td>';
+            $output .= '<td class="mcp-time">' . esc_html($time) . '</td>';
+            $output .= '<td style="text-align: center;"><a class="btn btn-color-primary btn-size-extra-small" href="' . $href . '" class="mcp-register-link link"><strong>Register</strong></a></td>';
+            $output .= '</tr>';
+        }
     }
-    $output .= '</tbody></table>';
+    $output .= '</tbody></table></div>';
     return $output;
 }
 
@@ -76,16 +81,12 @@ function view_all_workshops_shortcode() {
     if (empty($workshops) || ! is_array($workshops)) {
         return '<p class="mcp-empty mcp-empty-workshops">No workshops available at this time.</p>';
     }
-    return cf7_mcp_generate_events_table($workshops, 'workshops');
+    return create_events_table($workshops, 'workshops');
 }
 
 // Shortcode: [view_webinars]
 function view_all_webinars_shortcode() {
     global $wp_mcp;
     $webinars = get_option($wp_mcp::DB_KEY_WEBINARS);
-
-    if (empty($webinars) || !is_array($webinars)) {
-        return '<p class="mcp-empty mcp-empty-webinars">No webinars available at this time.</p>';
-    }
-    return cf7_mcp_generate_events_table($webinars, 'webinars');
+    return create_events_table($webinars, 'webinars');
 }
