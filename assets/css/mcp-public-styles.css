@@ -1,29 +1,91 @@
+.mcp-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.mcp-table-wrapper > table {
+  min-width: 500px;
+}
+
+/* Add fade shadows on sides */
+.mcp-table-wrapper::before,
+.mcp-table-wrapper::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.mcp-table-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+}
+
+.mcp-table-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+}
+
+/* Show shadows only when there's overflow */
+.mcp-table-wrapper:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mcp-table-wrapper:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .mcp-table {
   width: 100%;
   border-collapse: collapse;
+  border: none;
   border-radius: 10px;
-  border: 1px solid #ddd;
 }
+
 .mcp-table th,
 .mcp-table td {
   padding: 16px;
 }
+
 .mcp-table > thead > tr > th {
   font-weight: bold;
   background-color: #333;
-  border: solid 1px #333;
   color: #fff;
+  border-right: solid 1px #444;
 }
+
 .mcp-table th:first-child {
+  border-top-left-radius: 10px;
   text-align: left;
 }
+
 .mcp-table th:last-child {
   font-weight: normal;
+  border-top-right-radius: 10px;
+  border-right: none;
 }
+
+.mcp-empty td,
+.mcp-table > tbody > tr:last-child > td {
+  border: none;
+}
+
 .mcp-location {
   text-align: left;
 }
+
 .mcp-table a.btn-size-extra-small {
   padding: 5px 10px;
   border-radius: 2px;
+  font-size: 12px;
 }
